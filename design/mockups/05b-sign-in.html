@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Sign in</title><link rel="stylesheet" href="styles.css">
+<style>
+  body { height: 900px; display: grid; place-items: center; }
+  .box { width: 380px; }
+  .field { border: 1px solid var(--line-strong); border-radius: 8px; height: 40px; padding: 0 12px; display: flex; align-items: center; gap: 8px; background: var(--surface); color: var(--ink); margin-top: 6px; }
+</style></head>
+<body>
+<div class="box">
+  <div style="display:flex;gap:10px;align-items:center;justify-content:center;margin-bottom:22px">
+    <div class="brand-mark" style="width:36px;height:36px"><i data-i="briefcase"></i></div><b style="font-size:19px">Agency Roles</b>
+  </div>
+  <div class="card" style="padding:26px">
+    <h1 style="font-size:19px">Sign in</h1>
+    <div class="sub" style="margin-bottom:18px">Team access only. Ask an admin for an invite.</div>
+    <div class="label">Email</div>
+    <div class="field"><i data-i="mail" class="sm" style="color:var(--ink-3)"></i>sam@team.example</div>
+    <div class="label" style="margin-top:14px">Password</div>
+    <div class="field"><i data-i="lock" class="sm" style="color:var(--ink-3)"></i>••••••••••••</div>
+    <div style="display:flex;align-items:center;gap:8px;margin-top:14px;font-size:13px"><span class="check on"><i data-i="check"></i></span>Keep me signed in for 30 days</div>
+    <div class="btn primary" style="width:100%;justify-content:center;height:40px;margin-top:18px">Sign in</div>
+  </div>
+  <div class="faint" style="text-align:center;font-size:12.5px;margin-top:14px">Admins can invite teammates from Settings → Team</div>
+</div>
+<script src="icons.js"></script>
+</body></html>

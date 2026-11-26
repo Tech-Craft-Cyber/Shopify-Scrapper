@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Agencies</title><link rel="stylesheet" href="styles.css">
+<style>
+  .watch { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px; border-radius: 7px; font-size: 12.5px; font-weight: 550; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink-2); white-space: nowrap; }
+  .watch.on { border-color: var(--accent); background: var(--accent-wash); color: var(--accent-ink); }
+  .table td { padding: 11px 16px; }
+</style></head>
+<body>
+<header class="topbar">
+  <div class="brand"><div class="brand-mark"><i data-i="briefcase" class="sm"></i></div>Agency Roles</div>
+  <nav class="nav">
+    <a href="#"><i data-i="briefcase"></i>Roles <span class="count">684</span></a>
+    <a class="on" href="#"><i data-i="building"></i>Agencies <span class="count alert">29</span></a>
+    <a href="#"><i data-i="activity"></i>Runs</a>
+  </nav>
+  <div class="right">
+    <div class="run-pill"><span class="dot"></span>Last scrape 2 h ago · <b style="color:var(--ink)">38 new</b></div>
+    <i data-i="bell" class="lg" style="color:var(--ink-2)"></i>
+    <div class="avatar a1">ME</div>
+  </div>
+</header>
+
+<main class="page">
+  <div class="page-head">
+    <div><h1>Agencies</h1><div class="sub">All 919 partners from the directory and what the scraper found on each site. Watch an agency to get an alert when it posts a new role.</div></div>
+    <div class="input" style="width:280px"><i data-i="search"></i><span>Search agencies…</span></div>
+  </div>
+
+  <div style="display:flex;gap:8px;margin-bottom:14px;align-items:center">
+    <div class="seg">
+      <span class="on">All <span class="faint">919</span></span>
+      <span><i data-i="checkc" class="sm" style="color:var(--good)"></i>Hiring <span class="faint">191</span></span>
+      <span><i data-i="minus" class="sm"></i>No openings <span class="faint">88</span></span>
+      <span><i data-i="alert" class="sm" style="color:var(--warn-ink)"></i>Needs review <span class="count alert">29</span></span>
+      <span><i data-i="xc" class="sm"></i>No careers page <span class="faint">402</span></span>
+      <span>Other <span class="faint">209</span></span>
+    </div>
+    <span class="chip new" style="height:32px;padding:0 12px;font-size:13px"><i data-i="bell"></i>Watching · 6</span>
+    <div class="select" style="margin-left:auto">Tier: Any<i data-i="chev" class="sm"></i></div>
+    <div class="select"><i data-i="sort" class="sm"></i>Name A–Z<i data-i="chev" class="sm"></i></div>
+  </div>
+
+  <div class="card">
+    <table class="table">
+      <thead><tr><th>Agency</th><th>Status</th><th style="text-align:right">Open roles</th><th>Source</th><th>HQ</th><th>Team size</th><th>Last checked</th><th style="text-align:right">Alerts</th></tr></thead>
+      <tbody>
+        <tr><td><div style="display:flex;gap:10px;align-items:center"><div class="logo">A</div><div><b>Akers Digital</b> <span class="tier">Select</span><div class="faint" style="font-size:12.5px">akersdigital.com</div></div></div></td>
+          <td><span class="chip warn"><i data-i="alert"></i>Needs review</span></td><td class="tnum faint" style="text-align:right">—</td>
+          <td><span class="chip outline">Gusto</span></td><td>Austin</td><td>1–10</td><td class="faint">2 h ago</td><td style="text-align:right"><span class="watch"><i data-i="bell" class="sm"></i>Watch</span></td></tr>
+        <tr><td><div style="display:flex;gap:10px;align-items:center"><div class="logo">A</div><div><b>Anatta</b> <span class="tier">Plus</span><div class="faint" style="font-size:12.5px">anatta.io</div></div></div></td>
+          <td><span class="chip good"><i data-i="checkc"></i>Hiring</span></td><td class="tnum" style="text-align:right;font-weight:600">2</td>
+          <td><span class="chip outline">JazzHR</span></td><td>San Francisco</td><td>51–200</td><td class="faint">2 h ago</td><td style="text-align:right"><span class="watch"><i data-i="bell" class="sm"></i>Watch</span></td></tr>
+        <tr><td><div style="display:flex;gap:10px;align-items:center"><div class="logo">A</div><div><b>Anderson Collaborative</b> <span class="tier">Select</span><div class="faint" style="font-size:12.5px">andersoncollaborative.com</div></div></div></td>
+          <td><span class="chip good"><i data-i="checkc"></i>Hiring</span></td><td class="tnum" style="text-align:right;font-weight:600">11 <span class="chip new" style="height:18px;font-size:11px">+2</span></td>
+          <td><span class="chip outline">Careers page</span></td><td>Miami</td><td>11–50</td><td class="faint">2 h ago</td><td style="text-align:right"><span class="watch on"><i data-i="bell" class="sm"></i>Watching</span></td></tr>
+        <tr><td><div style="display:flex;gap:10px;align-items:center"><div class="logo">A</div><div><b>Arctic Leaf Inc.</b> <span class="tier">Plus</span><div class="faint" style="font-size:12.5px">arcticleaf.com</div></div></div></td>
+          <td><span class="chip"><i data-i="minus"></i>No openings</span></td><td class="tnum faint" style="text-align:right">0</td>
+          <td><span class="chip outline">Careers page</span></td><td>Toronto</td><td>11–50</td><td class="faint">2 h ago</td><td style="text-align:right"><span class="watch on"><i data-i="bell" class="sm"></i>Watching</span></td></tr>
+        <tr><td><div style="display:flex;gap:10px;align-items:center"><div class="logo">A</div><div><b>Avatria</b> <span class="tier">Select</span><div class="faint" style="font-size:12.5px">avatria.com</div></div></div></td>
+          <td><span class="chip"><i data-i="minus"></i>No openings</span></td><td class="tnum faint" style="text-align:right">0</td>
+          <td><span class="chip outline">JazzHR</span></td><td>Chicago</td><td>11–50</td><td class="faint">2 h ago</td><td style="text-align:right"><span class="watch on"><i data-i="bell" class="sm"></i>Watching</span></td></tr>
+        <tr><td><div style="display:flex;gap:10px;align-items:center"><div class="logo">A</div><div><b>Avenue Z</b> <span class="tier">Plus</span><div class="faint" style="font-size:12.5px">avenuez.com</div></div></div></td>
+          <td><span class="chip warn"><i data-i="alert"></i>Needs review</span></td><td class="tnum faint" style="text-align:right">—</td>
+          <td><span class="chip outline">Greenhouse</span></td><td>New York</td><td>51–200</td><td class="faint">2 h ago</td><td style="text-align:right"><span class="watch"><i data-i="bell" class="sm"></i>Watch</span></td></tr>
+        <tr><td><div style="display:flex;gap:10px;align-items:center"><div class="logo">B</div><div><b>Binaery</b> <span class="tier">Plus</span><div class="faint" style="font-size:12.5px">binaery.com</div></div></div></td>
+          <td><span class="chip good"><i data-i="checkc"></i>Hiring</span></td><td class="tnum" style="text-align:right;font-weight:600">4</td>
+          <td><span class="chip outline">Careers page</span></td><td>Austin</td><td>11–50</td><td class="faint">2 h ago</td><td style="text-align:right"><span class="watch"><i data-i="bell" class="sm"></i>Watch</span></td></tr>
+        <tr><td><div style="display:flex;gap:10px;align-items:center"><div class="logo">C</div><div><b>Cardinal Creative Agency</b> <span class="tier">Select</span><div class="faint" style="font-size:12.5px">cardinalcreativeagency.com</div></div></div></td>
+          <td><span class="chip"><i data-i="xc"></i>No careers page</span></td><td class="tnum faint" style="text-align:right">—</td>
+          <td class="faint">—</td><td>Denver</td><td>1–10</td><td class="faint">2 h ago</td><td style="text-align:right"><span class="watch"><i data-i="bell" class="sm"></i>Watch</span></td></tr>
+        <tr><td><div style="display:flex;gap:10px;align-items:center"><div class="logo">D</div><div><b>Darkroom</b> <span class="tier">Plus</span><div class="faint" style="font-size:12.5px">darkroomagency.com</div></div></div></td>
+          <td><span class="chip good"><i data-i="checkc"></i>Hiring</span></td><td class="tnum" style="text-align:right;font-weight:600">37 <span class="chip new" style="height:18px;font-size:11px">+4</span></td>
+          <td><span class="chip outline">Ashby</span></td><td>New York</td><td>201–500</td><td class="faint">2 h ago</td><td style="text-align:right"><span class="watch on"><i data-i="bell" class="sm"></i>Watching</span></td></tr>
+        <tr><td><div style="display:flex;gap:10px;align-items:center"><div class="logo">D</div><div><b>Dezerv.Co</b> <span class="tier">Select</span><div class="faint" style="font-size:12.5px">dezerv.co</div></div></div></td>
+          <td><span class="chip warn"><i data-i="alert"></i>Needs review</span></td><td class="tnum faint" style="text-align:right">—</td>
+          <td><span class="chip outline">Careers page</span></td><td>Los Angeles</td><td>1–10</td><td class="faint">2 h ago</td><td style="text-align:right"><span class="watch"><i data-i="bell" class="sm"></i>Watch</span></td></tr>
+      </tbody>
+    </table>
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-top:1px solid var(--line);color:var(--ink-2);font-size:13px">
+      <span>1–10 of 919 agencies</span><div style="display:flex;gap:6px"><span class="btn sm">Previous</span><span class="btn sm">Next</span></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px;padding:12px 16px;display:flex;gap:10px;align-items:center;font-size:13px;color:var(--ink-2)">
+    <i data-i="bell" style="color:var(--accent)"></i>
+    <span>Alerts for watched agencies arrive in the app (bell icon) and by email after each scrape: <b style="color:var(--ink)">“Arctic Leaf Inc. posted 2 new roles: Shopify Developer, Account Manager”</b></span>
+  </div>
+</main>
+<script src="icons.js"></script>
+</body></html>

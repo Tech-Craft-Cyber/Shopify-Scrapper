@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Agencies – needs review</title><link rel="stylesheet" href="styles.css">
+<style>
+  .q { display: grid; grid-template-columns: 1fr auto; gap: 16px; padding: 16px; border-bottom: 1px solid var(--line); align-items: center; }
+  .q:last-child { border-bottom: 0; }
+  .why { font-size: 13px; color: var(--ink-2); margin-top: 4px; display: flex; gap: 6px; align-items: center; }
+  .url { color: var(--accent-ink); font-size: 13px; display: inline-flex; gap: 5px; align-items: center; margin-top: 4px; }
+  .add { grid-column: 1 / -1; background: var(--surface-2); border: 1px solid var(--line); border-radius: 9px; padding: 14px; }
+  .field { border: 1px solid var(--line-strong); border-radius: 8px; height: 34px; padding: 0 10px; display: flex; align-items: center; background: var(--surface); font-size: 13.5px; }
+</style></head>
+<body>
+<header class="topbar">
+  <div class="brand"><div class="brand-mark"><i data-i="briefcase" class="sm"></i></div>Agency Roles</div>
+  <nav class="nav">
+    <a href="#"><i data-i="briefcase"></i>Roles <span class="count">684</span></a>
+    <a href="#"><i data-i="building"></i>Agencies <span class="count alert">29</span></a>
+    <a href="#"><i data-i="activity"></i>Runs</a>
+  </nav>
+  <div class="right">
+    <div class="run-pill"><span class="dot"></span>Last scrape 2 h ago · <b style="color:var(--ink)">38 new</b></div>
+    <i data-i="bell" class="lg" style="color:var(--ink-2)"></i>
+    <div class="avatar a1">ME</div>
+  </div>
+</header>
+
+<main class="page">
+  <div class="page-head">
+    <div><h1>Agencies</h1><div class="sub">All 919 partners from the directory and what the scraper found on each site. Watch an agency to get an alert when it posts a new role.</div></div>
+    <div class="input" style="width:280px"><i data-i="search"></i><span>Search agencies…</span></div>
+  </div>
+
+  <div style="display:flex;gap:8px;margin-bottom:14px;align-items:center">
+    <div class="seg">
+      <span>All <span class="faint">919</span></span>
+      <span><i data-i="checkc" class="sm" style="color:var(--good)"></i>Hiring <span class="faint">191</span></span>
+      <span><i data-i="minus" class="sm"></i>No openings <span class="faint">88</span></span>
+      <span class="on"><i data-i="alert" class="sm" style="color:var(--warn-ink)"></i>Needs review <span class="count alert">29</span></span>
+      <span><i data-i="xc" class="sm"></i>No careers page <span class="faint">402</span></span>
+      <span>Other <span class="faint">209</span></span>
+    </div>
+    <span class="chip outline" style="height:32px;padding:0 12px;font-size:13px;color:var(--ink)"><i data-i="bell"></i>Watching · 6</span>
+    <div class="select" style="margin-left:auto">Reason: Any<i data-i="chev" class="sm"></i></div>
+  </div>
+
+  <div style="display:flex;gap:10px;align-items:center;margin-bottom:12px;font-size:13px;color:var(--ink-2)">
+    <i data-i="info"></i>The scraper found a careers page on these sites but couldn't read the roles. Open the page and record what you see. Each answer is kept on later scrapes, and the agency comes back here only if its careers page changes.
+    <span style="margin-left:auto;white-space:nowrap">17 reviewed by the team</span>
+  </div>
+
+  <div class="card">
+    <div class="q">
+      <div>
+        <div style="display:flex;gap:8px;align-items:center"><b>Akers Digital</b><span class="tier">Select</span><span class="chip warn"><i data-i="alert"></i>General application only</span></div>
+        <div class="url">akersdigital.com/pages/careers<i data-i="ext" class="sm"></i></div>
+        <div class="why"><i data-i="info" class="sm"></i>Links to a Gusto “General inquiries” posting, but no specific roles</div>
+      </div>
+      <div style="display:flex;gap:6px"><span class="btn sm"><i data-i="ext"></i>Open page</span><span class="btn sm">No openings</span><span class="btn sm">Add role</span><span class="btn sm"><i data-i="bell"></i>Watch</span></div>
+    </div>
+
+    <div class="q" style="background:#fbfcfe">
+      <div>
+        <div style="display:flex;gap:8px;align-items:center"><b>Dezerv.Co</b><span class="tier">Select</span><span class="chip warn"><i data-i="alert"></i>No role titles found</span></div>
+        <div class="url">dezerv.co/pages/careers<i data-i="ext" class="sm"></i></div>
+        <div class="why"><i data-i="info" class="sm"></i>The page says “We hire operators.” and has an application form, but no listed titles</div>
+      </div>
+      <div style="display:flex;gap:6px"><span class="btn sm"><i data-i="ext"></i>Open page</span><span class="btn sm">No openings</span><span class="btn sm primary">Add role</span><span class="btn sm"><i data-i="bell"></i>Watch</span></div>
+      <div class="add">
+        <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr auto;gap:8px;align-items:end">
+          <div><div class="label" style="margin-bottom:6px">Role title</div><div class="field">Shopify Operations Lead</div></div>
+          <div><div class="label" style="margin-bottom:6px">Location</div><div class="field">Remote (US)</div></div>
+          <div><div class="label" style="margin-bottom:6px">Apply URL</div><div class="field faint">dezerv.co/pages/careers</div></div>
+          <div style="display:flex;gap:6px"><span class="btn sm">Cancel</span><span class="btn sm primary">Add</span></div>
+        </div>
+        <div class="faint" style="font-size:12.5px;margin-top:8px">Roles added by hand show a “Added by Jordan” tag and get flagged if the careers page changes.</div>
+      </div>
+    </div>
+
+    <div class="q">
+      <div>
+        <div style="display:flex;gap:8px;align-items:center"><b>Verbal+Visual</b><span class="tier">Plus</span><span class="chip warn"><i data-i="alert"></i>No role titles found</span></div>
+        <div class="url">vpv.co/culture<i data-i="ext" class="sm"></i></div>
+        <div class="why"><i data-i="info" class="sm"></i>The “Careers” link goes to a culture page that has a “We’re Hiring!” section</div>
+      </div>
+      <div style="display:flex;gap:6px"><span class="btn sm"><i data-i="ext"></i>Open page</span><span class="btn sm">No openings</span><span class="btn sm">Add role</span><span class="btn sm"><i data-i="bell"></i>Watch</span></div>
+    </div>
+
+    <div class="q">
+      <div>
+        <div style="display:flex;gap:8px;align-items:center"><b>Avenue Z</b><span class="tier">Plus</span><span class="chip crit"><i data-i="xc"></i>Job board broken</span></div>
+        <div class="url">avenuez.com/careers<i data-i="ext" class="sm"></i></div>
+        <div class="why"><i data-i="info" class="sm"></i>The page loads Greenhouse board “bevelpr”, which no longer exists (404)</div>
+      </div>
+      <div style="display:flex;gap:6px"><span class="btn sm"><i data-i="ext"></i>Open page</span><span class="btn sm">No openings</span><span class="btn sm">Add role</span><span class="btn sm"><i data-i="bell"></i>Watch</span></div>
+    </div>
+
+    <div class="q">
+      <div>
+        <div style="display:flex;gap:8px;align-items:center"><b>Arctic Grey</b><span class="tier premier">Premier</span><span class="chip warn"><i data-i="alert"></i>Page needs a browser</span></div>
+        <div class="url">arcticgrey.com/careers<i data-i="ext" class="sm"></i></div>
+        <div class="why"><i data-i="info" class="sm"></i>The roles load with JavaScript, and the headless browser timed out</div>
+      </div>
+      <div style="display:flex;gap:6px"><span class="btn sm"><i data-i="ext"></i>Open page</span><span class="btn sm">No openings</span><span class="btn sm">Add role</span><span class="btn sm"><i data-i="bell"></i>Watch</span></div>
+    </div>
+  </div>
+</main>
+<script src="icons.js"></script>
+</body></html>

@@ -1,0 +1,23 @@
+# systemd unit: /etc/systemd/system/agency-roles.service
+# Adjust User and paths, then:
+#   sudo systemctl daemon-reload && sudo systemctl enable --now agency-roles
+#   journalctl -u agency-roles -f          # logs
+[Unit]
+Description=Agency Roles (Shopify partner job board)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=agencyroles
+WorkingDirectory=/opt/agency-roles
+ExecStart=/opt/agency-roles/.venv/bin/python manage.py serve
+Restart=on-failure
+RestartSec=5
+# Chromium (headless browser fallback) needs a writable home for its cache.
+Environment=HOME=/opt/agency-roles
+# Keep a scrape from starving the box.
+Nice=5
+MemoryMax=2G
+
+[Install]
+WantedBy=multi-user.target

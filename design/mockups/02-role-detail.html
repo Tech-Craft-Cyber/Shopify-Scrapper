@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Role detail</title><link rel="stylesheet" href="styles.css">
+<style>
+  body { position: relative; height: 900px; overflow: hidden; }
+  .bg { filter: saturate(.9); }
+  .stage { display: flex; gap: 5px; }
+  .stage span { flex: 1; justify-content: center; display: inline-flex; align-items: center; gap: 5px; height: 32px; padding: 0 6px; border-radius: 8px; border: 1px solid var(--line-strong); font-size: 13px; font-weight: 550; color: var(--ink-2); }
+  .stage span.on { border-color: var(--accent); background: var(--accent-wash); color: var(--accent-ink); }
+  .mini { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; font-size: 13.5px; border-bottom: 1px solid var(--line); }
+  .mini:last-child { border-bottom: 0; }
+</style></head>
+<body>
+<header class="topbar">
+  <div class="brand"><div class="brand-mark"><i data-i="briefcase" class="sm"></i></div>Agency Roles</div>
+  <nav class="nav">
+    <a class="on" href="#"><i data-i="briefcase"></i>Roles <span class="count">684</span></a>
+    <a href="#"><i data-i="building"></i>Agencies <span class="count alert">29</span></a>
+    <a href="#"><i data-i="activity"></i>Runs</a>
+  </nav>
+  <div class="right">
+    <div class="run-pill"><span class="dot"></span>Last scrape 2 h ago · <b style="color:var(--ink)">38 new</b></div>
+    <i data-i="bell" class="lg" style="color:var(--ink-2)"></i>
+    <div class="avatar a1">ME</div>
+  </div>
+</header>
+
+<!-- dimmed list behind -->
+<main class="page bg">
+  <div class="page-head"><div><h1>Open roles</h1><div class="sub">684 roles at 191 Shopify partner agencies · Store building · United States</div></div></div>
+  <div class="card" style="width:820px">
+    <div class="role" style="grid-template-columns:1fr 200px"><div><div class="t">Shopify Engineer <span class="chip new">New</span></div><div class="meta">Peachy · Engineering</div></div><div class="who">Remote</div></div>
+    <div class="role" style="grid-template-columns:1fr 200px"><div><div class="t">Full-Stack Engineer <span class="chip new">New</span></div><div class="meta">Darkroom · Engineering</div></div><div class="who">Remote · New York</div></div>
+    <div class="role sel" style="grid-template-columns:1fr 200px"><div><div class="t">AI Agent Developer <span class="chip new">New</span></div><div class="meta">Anderson Collaborative · Engineering</div></div><div class="who">Birmingham metro or remote</div></div>
+    <div class="role" style="grid-template-columns:1fr 200px"><div><div class="t">Ecommerce Web Designer <span class="chip new">New</span></div><div class="meta">Peachy · Design</div></div><div class="who">Remote</div></div>
+    <div class="role" style="grid-template-columns:1fr 200px"><div><div class="t">Senior Web Developer <span class="chip new">New</span></div><div class="meta">Kasama · Engineering</div></div><div class="who">Remote · Philippines</div></div>
+    <div class="role" style="grid-template-columns:1fr 200px"><div><div class="t">E-commerce QA Engineer (Shopify)</div><div class="meta">Peachy · Engineering</div></div><div class="who">Remote</div></div>
+  </div>
+</main>
+<div class="scrim"></div>
+
+<aside class="drawer">
+  <div style="display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line)">
+    <span class="btn sm ghost" style="padding:0 6px"><i data-i="chev" style="transform:rotate(180deg)"></i></span>
+    <span class="btn sm ghost" style="padding:0 6px"><i data-i="chev"></i></span>
+    <span class="faint" style="font-size:12.5px">3 of 12</span>
+    <span class="btn sm ghost" style="margin-left:auto"><i data-i="link"></i>Copy link</span>
+    <span class="btn sm ghost"><i data-i="x"></i></span>
+  </div>
+  <div class="drawer-body">
+    <div style="display:flex;gap:14px;align-items:flex-start">
+      <div class="logo" style="width:44px;height:44px;font-size:16px">A</div>
+      <div style="flex:1">
+        <div style="display:flex;gap:8px;align-items:center"><span class="chip new">New · first seen today</span><span class="chip"><i data-i="info"></i>Parsed from careers page</span></div>
+        <h1 style="font-size:21px;margin-top:8px">AI Agent Developer</h1>
+        <div class="muted" style="margin-top:2px">Anderson Collaborative · Engineering · Mid level</div>
+        <div style="display:flex;gap:14px;margin-top:8px;color:var(--ink-2);font-size:13px">
+          <span style="display:flex;gap:5px;align-items:center"><i data-i="pin" class="sm"></i>Birmingham metro or remote (US)</span>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:16px">
+      <span class="btn primary" style="flex:1;justify-content:center">Apply on agency site<i data-i="ext"></i></span>
+      <span class="btn" style="color:var(--accent-ink);border-color:var(--accent)"><i data-i="bookmarkf"></i>Saved</span>
+    </div>
+
+    <div class="section" style="margin-top:18px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><h2>My status</h2><span class="faint" style="font-size:12.5px">Teammates see your status, not your notes</span></div>
+      <div class="stage">
+        <span class="on"><i data-i="bookmarkf" class="sm"></i>Saved</span>
+        <span><i data-i="send" class="sm"></i>Applied</span>
+        <span><i data-i="minus" class="sm"></i>Not interested</span>
+      </div>
+      <div class="note" style="margin-top:10px">Portfolio: link the Klaviyo flows case study + the Shopify Functions demo. Ask about AI agent stack.</div>
+    </div>
+
+    <div class="section">
+      <h2 style="margin-bottom:10px">Team activity</h2>
+      <div class="timeline">
+        <div class="tl"><span class="avatar sm a3">JR</span><div><b>Jordan</b> saved this role</div><span class="when">40 min ago</span></div>
+        <div class="tl"><span class="avatar sm a2">SK</span><div><b>Sam</b> applied to <b>Web Developer</b> at this agency</div><span class="when">3 days ago</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><h2>About the agency</h2><span class="btn sm" style="color:var(--accent-ink);border-color:var(--accent);background:var(--accent-wash)"><i data-i="bell"></i>Watching agency</span></div>
+      <dl class="kv">
+        <dt>Partner tier</dt><dd><span class="tier">Select</span></dd>
+        <dt>Headquarters</dt><dd>Miami, United States</dd>
+        <dt>Team size</dt><dd>11–50 people</dd>
+        <dt>Careers page</dt><dd style="color:var(--accent-ink);display:flex;gap:5px;align-items:center">andersoncollaborative.com/careers<i data-i="ext" class="sm"></i></dd>
+        <dt>Links</dt><dd style="display:flex;gap:12px;color:var(--accent-ink)"><span>Website</span><span>LinkedIn</span><span>Shopify profile</span></dd>
+      </dl>
+    </div>
+
+    <div class="section">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><h2>More roles here</h2><span style="color:var(--accent-ink);font-size:13px">All 11</span></div>
+      <div class="mini"><span>Web Developer</span><span class="faint">Birmingham metro or remote</span></div>
+      <div class="mini"><span>Paid Media Specialist</span><span class="faint">Birmingham metro or remote</span></div>
+      <div class="mini"><span>AI Development Intern</span><span class="faint">Hybrid, Birmingham metro</span></div>
+    </div>
+  </div>
+</aside>
+<script src="icons.js"></script>
+</body></html>

@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Runs</title><link rel="stylesheet" href="styles.css"></head>
+<body>
+<header class="topbar">
+  <div class="brand"><div class="brand-mark"><i data-i="briefcase" class="sm"></i></div>Agency Roles</div>
+  <nav class="nav">
+    <a href="#"><i data-i="briefcase"></i>Roles <span class="count">684</span></a>
+    <a href="#"><i data-i="building"></i>Agencies <span class="count alert">29</span></a>
+    <a class="on" href="#"><i data-i="activity"></i>Runs</a>
+  </nav>
+  <div class="right">
+    <div class="run-pill"><span class="dot live"></span>Scraping · 612 / 919</div>
+    <i data-i="bell" class="lg" style="color:var(--ink-2)"></i>
+    <div class="avatar a1">ME</div>
+  </div>
+</header>
+
+<main class="page">
+  <div class="page-head">
+    <div><h1>Scrape runs</h1><div class="sub">Store building · United States · 919 partner agencies · next run Thu 06:00 ET</div></div>
+    <div style="display:flex;gap:8px"><span class="btn"><i data-i="pause"></i>Stop current run</span><span class="btn primary"><i data-i="play"></i>Run now</span></div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1.25fr;gap:16px;margin-bottom:16px;align-items:start">
+    <!-- Current run -->
+    <div class="card">
+      <div class="card-head"><div style="display:flex;gap:10px;align-items:center"><span class="dot live"></span><h2>Current run</h2><span class="faint">started 06:00 ET by schedule</span></div><span class="muted tnum">612 / 919 · about 18 min left</span></div>
+      <div style="padding:14px 16px">
+        <div class="progress"><div style="width:66.6%"></div></div>
+        <div style="display:flex;gap:18px;margin-top:10px;font-size:12.5px;color:var(--ink-2)">
+          <span><b style="color:var(--ink)">131</b> hiring</span><span><b style="color:var(--ink)">472</b> roles so far</span><span><b style="color:var(--ink)">38</b> new roles</span><span><b style="color:var(--ink)">9</b> rate-limited (retried later)</span>
+        </div>
+      </div>
+      <div class="log">
+        <div><span class="ok">roles_found  </span> Peachy ······················ 5 roles · wearepeachy.com/careers</div>
+        <div><span class="no">no_careers   </span> Juicyorange ················· no careers link, sitemap entry, or common path</div>
+        <div><span class="ok">roles_found  </span> Darkroom ···················· 37 roles · ashby board</div>
+        <div><span class="w">rate_limited </span> Hidden Gears ················ HTTP 429, retried at the end of the run</div>
+        <div><span class="no">no_openings  </span> Arctic Leaf Inc. ············ page says there are no open positions</div>
+        <div><span class="ok">roles_found  </span> Anderson Collaborative ······ 11 roles · andersoncollaborative.com/careers</div>
+      </div>
+    </div>
+
+    <!-- Schedule editor -->
+    <div class="card" style="order:-1">
+      <div class="card-head">
+        <div style="display:flex;gap:10px;align-items:center"><i data-i="cal"></i><h2>Schedule</h2></div>
+        <div style="display:flex;gap:8px;align-items:center;font-size:13px">Scheduled runs on<span class="toggle on"></span></div>
+      </div>
+      <div style="padding:14px 16px;display:flex;flex-direction:column;gap:14px">
+        <div>
+          <div class="label" style="margin-bottom:6px">Repeat</div>
+          <div class="seg" style="width:100%"><span style="flex:1;justify-content:center">Every few hours</span><span class="on" style="flex:1;justify-content:center">Daily</span><span style="flex:1;justify-content:center">Weekly</span><span style="flex:1;justify-content:center">Cron</span></div>
+        </div>
+        <div style="display:grid;grid-template-columns:110px 1fr;gap:10px">
+          <div><div class="label" style="margin-bottom:6px">At</div><div class="select" style="width:100%;height:34px"><i data-i="clock" class="sm"></i>06:00<i data-i="chev" class="sm" style="margin-left:auto"></i></div></div>
+          <div><div class="label" style="margin-bottom:6px">Time zone</div><div class="select" style="width:100%;height:34px">America/New_York (ET)<i data-i="chev" class="sm" style="margin-left:auto"></i></div></div>
+        </div>
+        <div>
+          <div class="label" style="margin-bottom:6px">On these days</div>
+          <div style="display:flex;gap:6px">
+            <span class="chip" style="background:var(--ink);color:#fff;height:30px;width:42px;justify-content:center">Mon</span>
+            <span class="chip" style="background:var(--ink);color:#fff;height:30px;width:42px;justify-content:center">Tue</span>
+            <span class="chip" style="background:var(--ink);color:#fff;height:30px;width:42px;justify-content:center">Wed</span>
+            <span class="chip" style="background:var(--ink);color:#fff;height:30px;width:42px;justify-content:center">Thu</span>
+            <span class="chip" style="background:var(--ink);color:#fff;height:30px;width:42px;justify-content:center">Fri</span>
+            <span class="chip outline" style="height:30px;width:42px;justify-content:center">Sat</span>
+            <span class="chip outline" style="height:30px;width:42px;justify-content:center">Sun</span>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:7px;font-size:13px">
+          <div style="display:flex;gap:9px;align-items:center"><span class="check on"><i data-i="check"></i></span>Use the headless browser for JS-heavy or blocked sites</div>
+          <div style="display:flex;gap:9px;align-items:center"><span class="check on"><i data-i="check"></i></span>Retry rate-limited sites 1 hour after the run</div>
+          <div style="display:flex;gap:9px;align-items:center"><span class="check on"><i data-i="check"></i></span>Email the team new roles and watched-agency alerts</div>
+          <div style="display:flex;gap:9px;align-items:center"><span class="check on"><i data-i="check"></i></span>Skip a run if the previous one is still going</div>
+        </div>
+        <div style="background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:9px 12px;font-size:12.5px;color:var(--ink-2)">
+          <b style="color:var(--ink)">Next runs:</b> Thu Nov 27, 06:00 · Fri Nov 28, 06:00 · Mon Dec 1, 06:00 ET
+        </div>
+        <div style="display:flex;gap:8px;justify-content:flex-end"><span class="btn sm">Cancel</span><span class="btn sm primary">Save schedule</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tiles" style="grid-template-columns:repeat(4,1fr);margin-bottom:16px">
+    <div class="tile"><div class="label">Open roles</div><div class="v">684</div><div class="d"><b>+26</b> vs. yesterday</div></div>
+    <div class="tile"><div class="label">Agencies hiring</div><div class="v">191</div><div class="d">of 919 in the directory</div></div>
+    <div class="tile"><div class="label">New roles today</div><div class="v">38</div><div class="d">12 roles were removed</div></div>
+    <div class="tile"><div class="label">Verified roles</div><div class="v">59%</div><div class="d">read from ATS feeds or JSON-LD</div></div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+    <div class="card">
+      <div class="card-head"><div><h2>What each agency site gave us</h2><div class="faint" style="font-size:12.5px">Last completed run · 919 agencies</div></div><span class="btn sm ghost">Table view</span></div>
+      <div style="padding:12px 16px 16px">
+        <div class="hbar"><span>No careers page</span><div class="track"><div class="fill" style="width:100%"></div></div><span class="val">402</span></div>
+        <div class="hbar"><span>Hiring</span><div class="track"><div class="fill" style="width:47.5%"></div></div><span class="val">191</span></div>
+        <div class="hbar"><span>Site unreachable</span><div class="track"><div class="fill" style="width:23.9%"></div></div><span class="val">96</span></div>
+        <div class="hbar"><span>Careers page, no openings</span><div class="track"><div class="fill" style="width:21.9%"></div></div><span class="val">88</span></div>
+        <div class="hbar"><span>No company website</span><div class="track"><div class="fill" style="width:15.2%"></div></div><span class="val">61</span></div>
+        <div class="hbar"><span>Rate limited / timed out</span><div class="track"><div class="fill" style="width:12.9%"></div></div><span class="val">52</span></div>
+        <div class="hbar"><span>Needs review</span><div class="track"><div class="fill" style="width:7.2%"></div></div><span class="val">29</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div><h2>New roles per scrape</h2><div class="faint" style="font-size:12.5px">Last 14 daily runs</div></div><span class="btn sm ghost">Table view</span></div>
+      <div style="padding:22px 16px 14px 46px">
+        <div class="cols">
+          <div class="gridline" style="bottom:0"><span>0</span></div>
+          <div class="gridline" style="bottom:60px"><span>25</span></div>
+          <div class="gridline" style="bottom:120px"><span>50</span></div>
+          <div class="c" style="height:98px"></div><div class="c" style="height:65px"></div><div class="c" style="height:46px"></div>
+          <div class="c" style="height:79px"></div><div class="c" style="height:60px"></div><div class="c" style="height:29px"></div>
+          <div class="c" style="height:19px"></div><div class="c" style="height:86px"></div><div class="c" style="height:70px"></div>
+          <div class="c" style="height:50px"></div><div class="c" style="height:41px"></div><div class="c" style="height:106px"></div>
+          <div class="c" style="height:72px"></div><div class="c hi" style="height:91px"></div>
+        </div>
+        <div class="xaxis"><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span style="color:var(--ink);font-weight:600">26</span></div>
+        <div class="faint" style="font-size:12px;margin-top:8px">Nov 2026 · today: <b style="color:var(--ink)">38 new</b> · weekends dip as agencies post fewer roles</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><h2>Run history</h2></div>
+    <table class="table">
+      <thead><tr><th>Started</th><th>Trigger</th><th>Duration</th><th style="text-align:right">Agencies</th><th style="text-align:right">Roles</th><th style="text-align:right">New</th><th style="text-align:right">Removed</th><th>Result</th></tr></thead>
+      <tbody class="tnum">
+        <tr><td>Nov 26, 06:00</td><td>Schedule</td><td>running</td><td style="text-align:right">612 / 919</td><td style="text-align:right">472</td><td style="text-align:right">38</td><td style="text-align:right">—</td><td><span class="chip new"><i data-i="refresh"></i>In progress</span></td></tr>
+        <tr><td>Nov 25, 06:00</td><td>Schedule</td><td>52 min</td><td style="text-align:right">919</td><td style="text-align:right">658</td><td style="text-align:right">30</td><td style="text-align:right">17</td><td><span class="chip good"><i data-i="checkc"></i>Completed</span></td></tr>
+        <tr><td>Nov 24, 14:12</td><td><span style="display:inline-flex;gap:6px;align-items:center"><span class="avatar sm a3">JR</span>Jordan</span></td><td>49 min</td><td style="text-align:right">919</td><td style="text-align:right">645</td><td style="text-align:right">44</td><td style="text-align:right">9</td><td><span class="chip good"><i data-i="checkc"></i>Completed</span></td></tr>
+        <tr><td>Nov 24, 06:00</td><td>Schedule</td><td>31 min</td><td style="text-align:right">540 / 919</td><td style="text-align:right">—</td><td style="text-align:right">—</td><td style="text-align:right">—</td><td><span class="chip crit"><i data-i="xc"></i>Stopped: server restarted</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+<script src="icons.js"></script>
+</body></html>

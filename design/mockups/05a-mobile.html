@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Mobile</title><link rel="stylesheet" href="styles.css">
+<style>
+  body { height: 844px; overflow: hidden; }
+  .mbar { height: 52px; background: var(--surface); border-bottom: 1px solid var(--line); display: flex; align-items: center; padding: 0 16px; gap: 12px; }
+  .mcard { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; margin-bottom: 10px; box-shadow: var(--shadow); }
+  .mcard .t { font-weight: 600; font-size: 15px; display: flex; gap: 8px; align-items: center; }
+  .mcard .a { color: var(--ink-2); font-size: 13px; margin-top: 2px; display: flex; gap: 6px; align-items: center; }
+  .mcard .row { display: flex; gap: 8px; margin-top: 12px; }
+  .tabbar { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; background: var(--surface); border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(4, 1fr); }
+  .tabbar a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-size: 11px; color: var(--ink-3); font-weight: 550; }
+  .tabbar a.on { color: var(--ink); }
+  .hscroll { display: flex; gap: 6px; overflow: hidden; margin: 12px 0; }
+</style></head>
+<body>
+<div class="mbar">
+  <div class="brand-mark"><i data-i="briefcase" class="sm"></i></div>
+  <b style="font-size:16px">Open roles</b>
+  <span class="chip new" style="margin-left:auto">38 new</span>
+  <div class="avatar sm a1" style="width:28px;height:28px;font-size:11px">ME</div>
+</div>
+<div style="padding:12px 16px 80px">
+  <div class="input"><i data-i="search"></i><span>Title, agency, skill…</span></div>
+  <div class="hscroll">
+    <span class="chip" style="background:var(--ink);color:#fff"><i data-i="filter"></i>Filters · 3</span>
+    <span class="chip outline">Engineering</span><span class="chip outline">Design</span><span class="chip outline">Remote</span><span class="chip outline">New</span>
+  </div>
+  <div class="faint" style="font-size:12.5px;margin-bottom:8px">12 roles · newest first</div>
+
+  <div class="mcard">
+    <div class="t">Shopify Engineer <span class="chip new">New</span></div>
+    <div class="a">Peachy <span class="tier premier">Premier</span> · Remote</div>
+    <div class="row"><span class="btn sm" style="flex:1;justify-content:center"><i data-i="bookmark"></i>Save</span><span class="btn sm primary" style="flex:1;justify-content:center">Apply<i data-i="ext"></i></span></div>
+  </div>
+  <div class="mcard">
+    <div class="t">Full-Stack Engineer <span class="chip new">New</span></div>
+    <div class="a">Darkroom <span class="tier">Plus</span> · Remote · New York</div>
+    <div class="a" style="margin-top:8px"><span class="avatar sm a2">SK</span>Sam applied 2 d ago</div>
+    <div class="row"><span class="btn sm" style="flex:1;justify-content:center"><i data-i="bookmark"></i>Save</span><span class="btn sm primary" style="flex:1;justify-content:center">Apply<i data-i="ext"></i></span></div>
+  </div>
+  <div class="mcard">
+    <div class="t">AI Agent Developer <span class="chip new">New</span></div>
+    <div class="a">Anderson Collaborative <span class="tier">Select</span></div>
+    <div class="a">Birmingham metro or remote (US)</div>
+    <div class="row"><span class="btn sm" style="flex:1;justify-content:center;color:var(--accent-ink);border-color:var(--accent)"><i data-i="bookmarkf"></i>Saved</span><span class="btn sm primary" style="flex:1;justify-content:center">Apply<i data-i="ext"></i></span></div>
+  </div>
+  <div class="mcard">
+    <div class="t">Ecommerce Web Designer <span class="chip new">New</span></div>
+    <div class="a">Peachy <span class="tier premier">Premier</span> · Remote</div>
+  </div>
+</div>
+<nav class="tabbar">
+  <a class="on"><i data-i="briefcase" class="lg"></i>Roles</a>
+  <a><i data-i="bookmark" class="lg"></i>Saved</a>
+  <a><i data-i="building" class="lg"></i>Agencies</a>
+  <a><i data-i="activity" class="lg"></i>Runs</a>
+</nav>
+<script src="icons.js"></script>
+</body></html>
