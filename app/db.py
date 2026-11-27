@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS agencies (
 CREATE TABLE IF NOT EXISTS roles (
     id INTEGER PRIMARY KEY,
     agency_id INTEGER NOT NULL REFERENCES agencies(id) ON DELETE CASCADE,
-    key TEXT NOT NULL UNIQUE,
+    key TEXT NOT NULL,
     title TEXT NOT NULL,
     location TEXT, department TEXT, url TEXT, source TEXT, confidence TEXT,
     category TEXT, work_mode TEXT,
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS roles (
     added_by INTEGER REFERENCES users(id) ON DELETE SET NULL,
     needs_recheck INTEGER NOT NULL DEFAULT 0
 );
-CREATE INDEX IF NOT EXISTS roles_agency ON roles(agency_id);
+CREATE UNIQUE INDEX IF NOT EXISTS roles_agency_key ON roles(agency_id, key);  -- same job URL may sit under two directory listings
 CREATE INDEX IF NOT EXISTS roles_state ON roles(state);
 
 CREATE TABLE IF NOT EXISTS role_events (

@@ -102,6 +102,17 @@ def test_two_open_roles_with_same_title_stay_separate(conn):
     assert ch.added == [] and conn.execute("SELECT COUNT(*) FROM roles WHERE state='open'").fetchone()[0] == 2
 
 
+def test_same_job_link_under_two_agencies(conn):
+    # Two directory listings for one company can share a job board.
+    conn.execute("INSERT INTO agencies (id, handle, name, created_at) VALUES (2,'acme2','Acme (2nd listing)',?)", (AT[0],))
+    run(conn, 1, "roles_found", [DEV])
+    other = dict(conn.execute("SELECT * FROM agencies WHERE id=2").fetchone())
+    res = {"status": "roles_found", "careers_url": "", "partner": {}, "jobs": [DEV]}
+    ch = apply_result(conn, run_id=1, agency=other, result=res, at=AT[1])
+    assert len(ch.added) == 1
+    assert conn.execute("SELECT COUNT(*) FROM roles").fetchone()[0] == 2
+
+
 def test_duplicate_links_in_one_run_stored_once(conn):
     ch = run(conn, 1, "roles_found", [DEV, dict(DEV), dict(DEV, url=DEV["url"] + "&utm_source=li")])
     assert len(ch.added) == 1
