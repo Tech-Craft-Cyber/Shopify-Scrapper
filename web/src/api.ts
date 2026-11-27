@@ -9,7 +9,7 @@ export type AgencyRef = { id: number; name: string; handle: string; tier: string
 export type Role = {
   id: number; title: string; location: string; department: string; url: string; url_kind: "job" | "careers";
   category: string; work_mode: string; state: "open" | "missing" | "closed";
-  first_seen_at: string; last_seen_at: string; is_new: boolean; manual: boolean; needs_recheck: boolean;
+  first_seen_at: string; last_seen_at: string; first_seen_run: number | null; is_new: boolean; manual: boolean; needs_recheck: boolean;
   added_by: string | null; source: Source; agency: AgencyRef;
   my: { status: MyStatus; note: string }; team: TeamMark[];
 };
@@ -42,6 +42,17 @@ export type RunsData = {
     new_last_run: number | null; removed_last_run: number | null; verified_pct: number | null };
   breakdown: { label: string; count: number }[];
   new_per_run: { id: number; started_at: string; new_roles: number; baseline: boolean }[];
+};
+export type ChangeType = "added" | "reopened" | "reposted" | "missing" | "removed";
+export type RunOutcome = {
+  agency_id: number; name: string; tier: string; website: string; careers_url: string;
+  status: string; label: string; group: "hiring" | "no_openings" | "needs_review" | "no_careers" | "failed" | "other";
+  role_count: number; notes: string; at: string;
+};
+export type RunDetail = {
+  run: Run; counts: Record<ChangeType, number>;
+  changes: { type: ChangeType; detail: string; at: string; role: Role }[];
+  outcomes: RunOutcome[]; prev_id: number | null; next_id: number | null;
 };
 export type Schedule = {
   enabled: number | boolean; mode: "interval" | "daily" | "cron"; interval_hours: number; time: string; timezone: string;
@@ -96,6 +107,7 @@ export const api = {
   review: (id: number, action: "no_openings" | "ignored" | "reopen") => call("POST", `/agencies/${id}/review`, { action }),
   addRole: (id: number, r: { title: string; location: string; url: string }) => call<{ id: number }>("POST", `/agencies/${id}/roles`, r),
   runs: () => call<RunsData>("GET", "/runs"),
+  run: (id: number) => call<RunDetail>("GET", `/runs/${id}`),
   runLog: (id: number, after: number) => call<{ id: number; at: string; status: string; line: string }[]>("GET", `/runs/${id}/log?after=${after}`),
   runNow: () => call<{ id: number }>("POST", "/runs"),
   stopRun: () => call("POST", "/runs/stop"),

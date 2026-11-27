@@ -1,16 +1,18 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { RunsData, Schedule, api, duration, fmtDateTime } from "../api";
 import { useApp } from "../App";
 import { Icon } from "../icons";
 
 const DAYS = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
-const LOG_CLASS: Record<string, string> = { roles_found: "ok", careers_page_no_openings: "no", no_careers_page: "no", rate_limited: "w", timeout: "w", warning: "w", error: "w" };
+export const LOG_CLASS: Record<string, string> = { roles_found: "ok", careers_page_no_openings: "no", no_careers_page: "no", rate_limited: "w", timeout: "w", warning: "w", error: "w" };
 
 export default function RunsPage() {
   const { user, refreshSummary } = useApp();
   const [data, setData] = useState<RunsData | null>(null);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  const nav = useNavigate();
 
   const load = useCallback(() => api.runs().then(setData).catch((e) => setError(e.message)), []);
   useEffect(() => { load(); }, [load]);
@@ -63,14 +65,14 @@ export default function RunsPage() {
       </div>
 
       <div className="card table-wrap">
-        <div className="card-head"><h2>Run history</h2></div>
+        <div className="card-head"><h2>Run history</h2><span className="faint">Click a run to see what it changed</span></div>
         <table className="table">
           <thead><tr><th>Started</th><th>Trigger</th><th>Duration</th><th style={{ textAlign: "right" }}>Agencies</th><th style={{ textAlign: "right" }}>Open roles</th><th style={{ textAlign: "right" }}>New</th><th style={{ textAlign: "right" }}>Removed</th><th>Result</th></tr></thead>
           <tbody className="tnum">
             {!data ? <tr><td colSpan={8}><div className="empty"><span className="spinner" /></div></td></tr>
               : data.history.length === 0 ? <tr><td colSpan={8}><div className="empty">No runs yet.</div></td></tr>
               : data.history.map((r) => (
-                <tr key={r.id}>
+                <tr key={r.id} className="click" onClick={() => nav(`/runs/${r.id}`)} title={`Open run #${r.id}`}>
                   <td>{fmtDateTime(r.started_at)}</td>
                   <td>{r.trigger === "manual" ? (r.user_name ?? "Manual") : r.trigger === "import" ? "Import" : "Schedule"}</td>
                   <td>{["running", "retrying"].includes(r.status) ? "running" : duration(r.started_at, r.finished_at)}</td>
@@ -87,7 +89,7 @@ export default function RunsPage() {
   );
 }
 
-function RunChip({ status, error }: { status: string; error: string | null }) {
+export function RunChip({ status, error }: { status: string; error: string | null }) {
   if (status === "completed") return <span className="chip good"><Icon name="checkc" />Completed</span>;
   if (status === "running") return <span className="chip new"><Icon name="refresh" />In progress</span>;
   if (status === "retrying") return <span className="chip new"><Icon name="clock" />Retrying rate-limited</span>;

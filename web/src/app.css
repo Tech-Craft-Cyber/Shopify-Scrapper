@@ -58,7 +58,15 @@ textarea.note { width: 100%; resize: vertical; font-size: 13.5px; outline: none;
 .pill-btn { border: 0; background: none; padding: 0; }
 
 /* ---------- Phone / small tablet ---------- */
+.run-tiles .tile { font: inherit; color: inherit; text-align: left; cursor: pointer; display: flex; flex-direction: column; justify-content: flex-start; }
+.run-tiles .tile:hover { border-color: var(--line-strong); }
+.run-tiles .tile.on { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.log.full-log { max-height: 70vh; border-radius: 0 0 var(--radius) var(--radius); }
+
 @media (max-width: 900px) {
+  .tiles.run-tiles { grid-template-columns: repeat(3, 1fr) !important; gap: 8px !important; }
+  .run-tiles .tile { padding: 10px 12px; }
+  .run-tiles .tile .d { display: none; }
   .topbar { padding: 0 16px; gap: 12px; }
   .topbar .nav, .run-pill { display: none; }
   .page { padding: 16px 16px 84px; }

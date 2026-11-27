@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import RolesPage from "./pages/Roles";
 import AgenciesPage from "./pages/Agencies";
 import RunsPage from "./pages/Runs";
+import RunDetailPage from "./pages/RunDetail";
 import TeamPage from "./pages/Team";
 
 type Ctx = { user: User; summary: Summary | null; refreshSummary: () => void };
@@ -42,6 +43,7 @@ export default function App() {
         <Route path="/roles" element={<RolesPage />} />
         <Route path="/agencies" element={<AgenciesPage />} />
         <Route path="/runs" element={<RunsPage />} />
+        <Route path="/runs/:id" element={<RunDetailPage />} />
         <Route path="/team" element={<TeamPage />} />
         <Route path="*" element={<Navigate to="/roles" replace />} />
       </Routes>

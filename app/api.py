@@ -182,6 +182,7 @@ def _role_out(r: dict, latest, baseline, mine, team) -> dict:
         "category": r["category"] or categorize(r["title"]),
         "work_mode": r["work_mode"] or work_mode(r["location"] or "", r["title"]),
         "state": r["state"], "first_seen_at": r["first_seen_at"], "last_seen_at": r["last_seen_at"],
+        "first_seen_run": r["first_seen_run"],
         "is_new": is_new(r, latest, baseline), "manual": bool(r["manual"]), "needs_recheck": bool(r["needs_recheck"]),
         "added_by": r.get("added_by_name"), "source": source_info(r),
         "agency": {"id": r["agency_id"], "name": r["agency_name"], "handle": r["agency_handle"],
@@ -432,6 +433,53 @@ def runs(user=Depends(current_user), conn=Depends(get_conn)):
         "new_per_run": [{"id": h["id"], "started_at": h["started_at"], "new_roles": h["new_roles"],
                          "baseline": bool(h["baseline"])} for h in reversed(completed[:14])],
     }
+
+
+CHANGE_TYPES = ("added", "reopened", "reposted", "missing", "removed")
+OUTCOME_GROUP = {"roles_found": "hiring", "careers_page_no_openings": "no_openings",
+                 "careers_page_roles_unclear": "needs_review", "no_careers_page": "no_careers",
+                 "rate_limited": "failed", "timeout": "failed", "site_unreachable": "failed",
+                 "error": "failed", "profile_error": "failed"}
+
+
+@router.get("/runs/{run_id}")
+def run_detail(run_id: int, user=Depends(current_user), conn=Depends(get_conn)):
+    """One run: what it changed (roles added, back, reposted, may be closed, removed) and each agency's outcome."""
+    run = db.one(conn.execute("SELECT r.*, u.name AS user_name FROM runs r LEFT JOIN users u ON u.id=r.user_id"
+                              " WHERE r.id=?", (run_id,)))
+    if not run:
+        raise HTTPException(404, "Run not found")
+    run.pop("settings", None)
+    run.pop("status_counts", None)
+    latest, baseline = new_marker(conn)
+    mine, team = _team_activity(conn, user["id"])
+    marks = ",".join("?" * len(CHANGE_TYPES))
+    events = db.rows(conn.execute(
+        f"SELECT e.id AS event_id, e.type, e.detail, e.at AS event_at, e.role_id FROM role_events e"
+        f" WHERE e.run_id=? AND e.type IN ({marks}) ORDER BY e.id", (run_id, *CHANGE_TYPES)))
+    roles = {r["id"]: r for r in db.rows(conn.execute(
+        ROLE_SQL + " WHERE r.id IN (SELECT role_id FROM role_events WHERE run_id=?)", (run_id,)))}
+    changes = []
+    for e in events:
+        r = roles.get(e["role_id"])
+        if r:
+            changes.append({"type": e["type"], "detail": e["detail"] or "", "at": e["event_at"],
+                            "role": _role_out(r, latest, baseline, mine, team)})
+    counts = {t: 0 for t in CHANGE_TYPES}
+    for c in changes:
+        counts[c["type"]] += 1
+    outcomes = db.rows(conn.execute(
+        "SELECT ra.agency_id, ra.status, ra.role_count, ra.notes, ra.at, a.name, a.tier, a.website, a.careers_url"
+        " FROM run_agencies ra JOIN agencies a ON a.id=ra.agency_id WHERE ra.run_id=? ORDER BY a.name COLLATE NOCASE",
+        (run_id,)))
+    for o in outcomes:
+        o["label"] = STATUS_LABEL.get(o["status"], o["status"])
+        o["group"] = OUTCOME_GROUP.get(o["status"], "other")
+        o["notes"] = o["notes"] or ""
+    ids = [i for (i,) in conn.execute("SELECT id FROM runs ORDER BY id")]
+    pos = ids.index(run_id)
+    return {"run": run, "counts": counts, "changes": changes, "outcomes": outcomes,
+            "prev_id": ids[pos - 1] if pos else None, "next_id": ids[pos + 1] if pos + 1 < len(ids) else None}
 
 
 @router.get("/runs/{run_id}/log")

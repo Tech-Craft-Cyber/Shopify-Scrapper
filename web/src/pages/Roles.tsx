@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { MyStatus, Role, api } from "../api";
+import { MyStatus, Role, Run, api, fmtDateTime } from "../api";
 import { useApp } from "../App";
 import { Icon } from "../icons";
-import { Check, Logo, SourceChip, TeamCell, Tier, Toggle, WorkModeIcon, persist, store } from "../components/bits";
+import { Check, Toggle, persist, store } from "../components/bits";
+import RoleRow from "../components/RoleRow";
 import RoleDrawer from "../components/RoleDrawer";
 
 const CATEGORIES = ["Engineering", "Design", "Marketing & growth", "Project & account", "Sales", "Data & analytics", "Internship", "Other"];
@@ -30,6 +31,9 @@ export default function RolesPage() {
   const [shown, setShown] = useState(PAGE);
   const [showFilters, setShowFilters] = useState(false);
   const savedOnly = params.get("saved") === "1";
+  const runFilter = Number(params.get("run")) || null;
+  const [runs, setRuns] = useState<Run[]>([]);
+  useEffect(() => { api.runs().then((d) => setRuns(d.history)).catch(() => {}); }, []);
   const openId = Number(params.get("role")) || null;
 
   const load = useCallback(() => { api.roles().then(setRoles).catch((e) => setError(e.message)); }, []);
@@ -38,6 +42,7 @@ export default function RolesPage() {
 
   const set = (patch: Partial<Filters>) => setF((x) => ({ ...x, ...patch }));
   const setSavedOnly = (on: boolean) => { const p = new URLSearchParams(params); if (on) p.set("saved", "1"); else p.delete("saved"); setParams(p); };
+  const setRunFilter = (id: number | null) => { const p = new URLSearchParams(params); if (id) p.set("run", String(id)); else p.delete("run"); setParams(p); };
   const openRole = (id: number | null) => { const p = new URLSearchParams(params); if (id) p.set("role", String(id)); else p.delete("role"); setParams(p); };
 
   const filtered = useMemo(() => {
@@ -46,6 +51,7 @@ export default function RolesPage() {
     let out = roles.filter((r) => {
       if (savedOnly && r.my.status !== "saved") return false;
       if (!savedOnly && f.hideApplied && (r.my.status === "applied" || r.my.status === "not_interested")) return false;
+      if (runFilter && r.first_seen_run !== runFilter) return false;
       if (f.hideTeam && r.team.some((t) => t.status === "applied")) return false;
       if (f.newOnly && !r.is_new) return false;
       if (f.cats.length && !f.cats.includes(r.category)) return false;
@@ -60,7 +66,15 @@ export default function RolesPage() {
     if (f.sort === "title") out = [...out].sort((a, b) => a.title.localeCompare(b.title));
     if (f.sort === "newest") out = [...out].sort((a, b) => Number(b.is_new) - Number(a.is_new) || b.first_seen_at.localeCompare(a.first_seen_at));
     return out;
-  }, [roles, f, savedOnly]);
+  }, [roles, f, savedOnly, runFilter]);
+
+  // Runs that first found at least one of the roles still open, newest first.
+  const runOptions = useMemo(() => {
+    const n = new Map<number, number>();
+    for (const r of roles ?? []) if (r.first_seen_run) n.set(r.first_seen_run, (n.get(r.first_seen_run) ?? 0) + 1);
+    if (runFilter && !n.has(runFilter)) n.set(runFilter, 0);
+    return [...n.entries()].sort((a, b) => b[0] - a[0]).map(([id, count]) => ({ id, count, run: runs.find((x) => x.id === id) }));
+  }, [roles, runs, runFilter]);
 
   const count = (pred: (r: Role) => boolean) => (roles ? roles.filter(pred).length : 0);
   const setMine = async (role: Role, status: MyStatus) => {
@@ -76,6 +90,7 @@ export default function RolesPage() {
     ...f.sources.map((c) => [SOURCES.find((s) => s[0] === c)?.[1] ?? c, () => set({ sources: toggleIn(f.sources, c) })] as [string, () => void]),
     ...f.tiers.map((c) => [c, () => set({ tiers: toggleIn(f.tiers, c) })] as [string, () => void]),
     ...(f.size ? [[`Team ${f.size}`, () => set({ size: "" })] as [string, () => void]] : []),
+    ...(runFilter ? [[`Found in run #${runFilter}`, () => setRunFilter(null)] as [string, () => void]] : []),
     ...(f.newOnly ? [["New since last scrape", () => set({ newOnly: false })] as [string, () => void]] : []),
   ];
   const nFilters = activeChips.length + (savedOnly ? 1 : 0);
@@ -104,6 +119,14 @@ export default function RolesPage() {
             <Toggle on={f.newOnly} onClick={() => set({ newOnly: !f.newOnly })} n={summary?.new_roles ?? count((r) => r.is_new)}>New since last scrape</Toggle>
             <Toggle on={f.hideApplied} onClick={() => set({ hideApplied: !f.hideApplied })} n={count((r) => r.my.status === "applied" || r.my.status === "not_interested")}>Hide applied / not interested</Toggle>
             <Toggle on={f.hideTeam} onClick={() => set({ hideTeam: !f.hideTeam })} n={count((r) => r.team.some((t) => t.status === "applied"))}>Hide if a teammate applied</Toggle>
+          </div>
+          <div className="fgroup">
+            <div className="label">Found in run</div>
+            <select className="field-input" value={runFilter ?? ""} onChange={(e) => setRunFilter(Number(e.target.value) || null)} aria-label="Found in run">
+              <option value="">Any run</option>
+              {runOptions.map((o) => (
+                <option key={o.id} value={o.id}>#{o.id}{o.run ? ` · ${fmtDateTime(o.run.started_at)}` : ""}{o.run?.baseline ? " · baseline" : ""} ({o.count})</option>))}
+            </select>
           </div>
           <div className="fgroup">
             <div className="label">Role type {f.cats.length > 0 && <button className="pill-btn" style={{ color: "var(--accent)", textTransform: "none", letterSpacing: 0, fontWeight: 550 }} onClick={() => set({ cats: [] })}>Clear</button>}</div>
@@ -148,27 +171,9 @@ export default function RolesPage() {
               <span className="label">Role</span><span className="label">Location</span><span className="label">Team</span><span />
             </div>
             {roles === null ? <div className="empty"><span className="spinner" /></div>
-              : filtered.length === 0 ? <div className="empty">{savedOnly ? "You haven't saved any roles yet." : roles.length === 0 ? "No roles yet. Run a scrape from the Runs page." : "No roles match these filters."}</div>
+              : filtered.length === 0 ? <div className="empty">{savedOnly ? "You haven't saved any roles yet." : roles.length === 0 ? "No roles yet. Run a scrape from the Runs page." : runFilter ? "No open roles from this run match these filters." : "No roles match these filters."}</div>
               : filtered.slice(0, shown).map((r) => (
-                <div key={r.id} className={`role ${openId === r.id ? "sel" : ""}`} onClick={() => openRole(r.id)}>
-                  <div style={{ display: "flex", gap: 12, alignItems: "center", minWidth: 0 }}>
-                    <Logo name={r.agency.name} />
-                    <div style={{ minWidth: 0 }}>
-                      <div className="t">{r.title}{r.is_new && <span className="chip new">New</span>}
-                        {r.state === "missing" && <span className="chip warn" title="Not listed in the last successful check; removed if it's missing again"><Icon name="alert" />May be closed</span>}
-                        {r.needs_recheck && <span className="chip warn"><Icon name="alert" />Re-check</span>}</div>
-                      <div className="meta">{r.agency.name} <Tier tier={r.agency.tier} /><span className="sep">·</span>{r.category}<span className="sep">·</span><SourceChip source={r.source} /></div>
-                    </div>
-                  </div>
-                  <div className="who"><WorkModeIcon mode={r.work_mode} />{r.location || r.work_mode}</div>
-                  <div><TeamCell team={r.team} /></div>
-                  <div className="acts" onClick={(e) => e.stopPropagation()}>
-                    <button className={`btn sm ${r.my.status === "saved" ? "on" : ""}`} onClick={() => setMine(r, r.my.status === "saved" ? null : "saved")}>
-                      <Icon name={r.my.status === "saved" ? "bookmarkf" : "bookmark"} />{r.my.status === "saved" ? "Saved" : r.my.status === "applied" ? "Applied" : "Save"}</button>
-                    {r.url && <a className="btn sm primary" href={r.url} target="_blank" rel="noreferrer noopener"
-                      title={r.url_kind === "job" ? "Open the job posting" : "This role has no page of its own; opens the careers page"}>Apply<Icon name="ext" /></a>}
-                  </div>
-                </div>))}
+                <RoleRow key={r.id} role={r} selected={openId === r.id} onOpen={() => openRole(r.id)} onSetMine={(st) => setMine(r, st)} />))}
             {filtered.length > shown && (
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 16px", borderTop: "1px solid var(--line)", color: "var(--ink-2)", fontSize: 13 }}>
                 <span>Showing {shown} of {filtered.length}</span>
